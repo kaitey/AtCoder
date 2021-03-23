@@ -1,15 +1,25 @@
+def prime_factorize(n):
+    a = []
+    while n % 2 == 0:
+        a.append(2)
+        n //= 2
+    f = 3
+    while f * f <= n:
+        if n % f == 0:
+            a.append(f)
+            n //= f
+        else:
+            f += 2
+    if n != 1:
+        a.append(n)
+    return a
+
+
 def main():
     n = int(input())
     A = [-1] * n
-    A[0] = 1
-    i = 1
-    while i < n:
-        if A[i] == -1:
-            A[i] = 2
-            for j in range(2, n // (i + 1) + 1):
-                if A[(i + 1) * j - 1] == -1:
-                    A[(i + 1) * j - 1] = j + 1
-        i += 1
+    for i in range(n):
+        A[i] = len(prime_factorize(i + 1)) + 1
     print(*A)
 
 

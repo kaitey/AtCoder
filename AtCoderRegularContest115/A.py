@@ -1,15 +1,14 @@
 def main():
     n, m = list(map(int, input().split()))
-    S = [0] * n
+    even, odd = 0, 0
     for i in range(n):
-        S[i] = int(input(), 2)
+        s_i = input()
+        if s_i.count("1") % 2 == 1:
+            odd += 1
+        else:
+            even += 1
 
-    cnt = 0
-    for i in range(n):
-        for j in range(i + 1, n):
-            if bin(S[i] ^ S[j])[2:].count("1") % 2 == 1:
-                cnt += 1
-    print(cnt)
+    print(odd * even)
 
 
 if __name__ == '__main__':
