@@ -1,29 +1,17 @@
-import operator
-
-
-def calc(box, baggage):
-    box.sort()
-    value = 0
-    i = 0
-    while box and i < len(baggage):
-        for j, b in enumerate(box):
-            if b >= baggage[i][0]:
-                value += baggage[i][1]
-                box.pop(j)
-                break
-        i += 1
-    print(value)
+from math import sin, cos, pi
 
 
 def main():
-    n, m, q = list(map(int, input().split()))
-    baggage = [list(map(int, input().split())) for _ in range(n)]
-    baggage = sorted(baggage, key=operator.itemgetter(1, 0))
-    baggage.reverse()
-    boxes = list(map(int, input().split()))
-    for _ in range(q):
-        l, r = list(map(int, input().split()))
-        calc(boxes[:l-1] + boxes[r:], baggage)
+    n = int(input())
+    x0, y0 = list(map(int, input().split()))
+    xn, yn = list(map(int, input().split()))
+    xc, yc = (x0 + xn) / 2, (y0 + yn) / 2
+    c0 = complex(x0, y0)
+    cc = complex(xc, yc)
+    ang = 2 * pi / n
+    rot = complex(cos(ang), sin(ang))
+    c1 = (c0 - cc) * rot + cc
+    print(c1.real, c1.imag)
 
 
 if __name__ == '__main__':
