@@ -1,19 +1,12 @@
 def main():
     h, w = list(map(int, input().split()))
-    s = [["."] * w for _ in range(h)]
-    c = [[] for _ in range(h)]
+    S = [input() for _ in range(h)]
     num = 0
-    for i in range(h):
-        for j in range(w-1):
-            if s[j][i] != s[j+1][i]:
-                c[i].append(i)
-    for i in range(h-1):
-        diff = list(set(s[i]) ^ set(s[i+1]))
-        diff.sort(reverse=True)
-        for l in reversed(range(1, len(diff))):
-            if diff[l] - diff[l-1] > 1:
+    for i in range(1, h):
+        for j in range(1, w):
+            if (S[i-1][j-1], S[i][j-1], S[i - 1][j], S[i][j]).count("#") % 2 != 0:
                 num += 1
-
+    print(num)
 
 
 if __name__ == '__main__':

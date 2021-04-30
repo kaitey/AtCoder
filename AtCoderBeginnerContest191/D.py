@@ -1,43 +1,33 @@
 from math import floor, ceil, sqrt
-from copy import deepcopy
+
+
+SHIFT = 10 ** 4
+
+
+def trans(x):
+    return int(round(float(x) * SHIFT))
 
 
 def main():
-    x, y, r = list(map(float, input().split(" ")))
-    x_diameter = [ceil(x-r), floor(x+r)]
+    x, y, r = list(map(trans, input().split(" ")))
     num = 0
-    tmp_dia = deepcopy(x_diameter)
-    for ya in range(ceil(y), floor(y+r) + 1):
-        dia = [0, -1]
-        for xa in range(tmp_dia[0], tmp_dia[1]+1):
-            if sqrt((xa - x) ** 2 + (ya - y) ** 2) <= r:
-                dia[0] = xa
-                break
-        for xa in range(tmp_dia[1], tmp_dia[0]-1, -1):
-            if sqrt((xa - x) ** 2 + (ya - y) ** 2) <= r:
-                dia[1] = xa
-                break
-        num += (dia[1] - dia[0] + 1)
-        tmp_dia = deepcopy(dia)
 
-    if floor(y) == ceil(y):
-        start_y = floor(y) - 1
-    else:
-        start_y = floor(y)
+    decided = False
+    ya = y - r - 1
+    while ya < y + r + 1:
+        if not decided and ya % SHIFT != 0:
+            ya += 1
+            continue
+        decided = True
+        try:
+            xa = sqrt(r ** 2 - (ya - y) ** 2)
+        except ValueError:
+            ya += SHIFT
+            continue
+        dia = [x - xa, x + xa]
+        num += (floor(dia[1] / SHIFT) - ceil(dia[0] / SHIFT) + 1)
+        ya += SHIFT
 
-    tmp_dia = deepcopy(x_diameter)
-    for ya in range(start_y, ceil(y-r) - 1, -1):
-        dia = [0, -1]
-        for xa in range(tmp_dia[0], tmp_dia[1]+1):
-            if sqrt((xa - x) ** 2 + (ya - y) ** 2) <= r:
-                dia[0] = xa
-                break
-        for xa in range(tmp_dia[1], tmp_dia[0]-1, -1):
-            if sqrt((xa - x) ** 2 + (ya - y) ** 2) <= r:
-                dia[1] = xa
-                break
-        num += (dia[1] - dia[0] + 1)
-        tmp_dia = deepcopy(dia)
     print(num)
 
 
