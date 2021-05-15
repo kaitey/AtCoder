@@ -3,7 +3,7 @@
 
 # 参考するサイト
  - [@e869120のTwitter アカウント](https://twitter.com/e869120)
- - [Github_E869120/kyopro_educational_90](https://github.com/E869120/kyopro_educational_90/tree/main/editorial)
+ - [Github_E869120/kyopro_educational_90](https://github.com/E869120/kyopro_educational_90)
 
 # 更新履歴
 
@@ -18,6 +18,9 @@
 
 ## 007
  - 2021-05-04 AC  
+
+## 008
+ - 2021-05-15 AC  
 
 ## 010
  - 2021-05-03 AC  
